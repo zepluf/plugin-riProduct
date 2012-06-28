@@ -47,17 +47,17 @@ class Products extends Object{
 	    return $this->generateCollection($result);
 	}
 	
-	public function generateSql($filters = array(), $limit = 0){
+	public function generateSql($filters = array('p.products_status = 1'), $limit = 0){
 	    $sql = "select distinct *
                from " . TABLE_PRODUCTS . " p
                left join " . TABLE_MANUFACTURERS . " m on p.manufacturers_id = m.manufacturers_id
                left join " . TABLE_SPECIALS . " s on p.products_id = s.products_id
                left join " . TABLE_FEATURED . " f on p.products_id = f.products_id
-               left join " . TABLE_PRODUCTS_DESCRIPTION . " pd on p.products_id = pd.products_id 
-               where p.products_id = f.products_id
-               and p.products_id = pd.products_id
-               and p.products_status = 1 and f.status = 1
-               and pd.language_id = '" . (int)$_SESSION['languages_id'] . "'";
+               left join " . TABLE_PRODUCTS_DESCRIPTION . " pd on p.products_id = pd.products_id AND pd.language_id = '" . (int)$_SESSION['languages_id'] . "'";
+            
+            if(count($filters) > 0){
+                $sql .= ' WHERE ' . implode (' ', $filters);
+            }
 	    
 	    if($limit > 0) $sql .= " limit " . (int)$limit;
 	    
