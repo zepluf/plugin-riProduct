@@ -1,7 +1,7 @@
 <?php
 namespace plugins\riProduct;
 
-use plugins\riPlugin\Object;
+use plugins\riCore\Object;
 use plugins\riPlugin\Plugin;
 
 class Products extends Object{
