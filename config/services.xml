@@ -9,7 +9,9 @@
         <service id="riProduct.Products" class="plugins\riProduct\Products" scope="container">
         </service>   
         <service id="riProduct.ProductsDescription" class="plugins\riProduct\ProductsDescription" scope="container">
-        </service>        
+        </service>  
+        <service id="riProduct.Observer" class="plugins\riProduct\Observer" scope="container">
+        </service>       
     </services>
 
 </container>

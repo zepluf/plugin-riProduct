@@ -3,8 +3,8 @@
 	<name>Product Helper</name>
 	<summary>Basic Product Helper</summary>
 	<preload>
-		<frontend>true</frontend>		
-		<frontend>backend</frontend>
+		<frontend>true</frontend>
+		<backend>true</backend>
 	</preload>
 	<notes>
 	 
