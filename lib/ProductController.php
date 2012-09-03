@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 class ProductController extends Controller{
 	
-	public function AjaxFindByNameAction(Request $request) {
+	public function ajaxFindByNameAction(Request $request) {
 		$products = Plugin::get('riProduct.Products')->findByName($request->get('term'));
 		$data = array();
 		foreach ($products as $product){
