@@ -63,7 +63,7 @@ class ProductController extends Controller{
 		
 		$this->container->get('templating.holder')->add('main', $this->view->render('riMerchant::_index.php', array('result_list' => $result_list, 'merchant' => $merchant, 'merchants' => $merchants, 'current_route' => $request->get('_route'))));
 		
-		return $this->render('riMerchant::admin_layout');
+		return $this->render('riZCAdmin::backend/layout');
 	}
 	
 	public function import(Request $request){
@@ -81,7 +81,7 @@ class ProductController extends Controller{
 	    }
 	    $this->container->get('templating.holder')->add('main', $this->view->render('riMerchant::_import'));
 	    
-	    return $this->render('riMerchant::admin_layout');
+	    return $this->render('riZCAdmin::backend/layout');
 	}
 	
     public function export(Request $request){
