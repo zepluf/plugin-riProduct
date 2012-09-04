@@ -7,24 +7,33 @@ use plugins\riPlugin\Plugin;
 class RiProduct extends PluginCore{
     
     public function install(){
-        
         global $db;
-        $tabs = Plugin::get('settings')->load("riProduct"); 
-        $tabs = $tabs['add_tabs'];
-        
-        $after = $tabs['after'];
-        foreach($tabs['tabs'] as $key => $value ){
-            $db->Execute("ALTER TABLE " . TABLE_PRODUCTS_DESCRIPTION . " ADD " . $key ." " .$value['type'] . " AFTER ". $after);
+        $settings = Plugin::get('settings')->load("riProduct");
+
+        $columns = Plugin::get('riCore.DatabasePatch')->getColumns(TABLE_PRODUCTS_DESCRIPTION);
+
+        foreach($settings['tabs'] as $key => $value ){
+            if(!in_array($key, $columns))
+            $db->Execute("ALTER TABLE " . TABLE_PRODUCTS_DESCRIPTION . " ADD " . $key ." " .$value['type']);
         }
         
         return true;
     }
-    
+
     public function uninstall(){
-        //return Plugin::get('riCore.DatabasePatch')->executeSqlFile(file(__DIR__ . '/install/sql/uninstall.sql'));
+        global $db;
+        $settings = Plugin::get('settings')->load("riProduct");
+
+        $columns = Plugin::get('riCore.DatabasePatch')->getColumns(TABLE_PRODUCTS_DESCRIPTION);
+
+        foreach($settings['tabs'] as $key => $value ){
+            if(in_array($key, $columns))
+                $db->Execute("ALTER TABLE " . TABLE_PRODUCTS_DESCRIPTION . " DROP COLUMN " . $key);
+        }
+
         return true;
     }
-    
+
     public function init(){
         
         //Plugin::get('templating.holder')->add("FORM_ADD_INFO_PRODUCT", Plugin::get('View')->render("riProduct::backend/_addform.php"));
@@ -34,6 +43,4 @@ class RiProduct extends PluginCore{
                 $autoLoadConfig[200][] = array('autoType' => 'include', 'loadFile' => __DIR__ . '/lib/observers.php');
             }
     }
-
-    
 }
