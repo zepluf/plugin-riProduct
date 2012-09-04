@@ -2,7 +2,7 @@
 
 global $languages;
 $pd = \plugins\riPlugin\Plugin::get('riProduct.ProductsDescription');
-$tabs = \plugins\riPlugin\Plugin::get('settings')->get("riProduct.add_tabs.tabs");
+$tabs = \plugins\riPlugin\Plugin::get('settings')->get("riProduct.tabs");
 $fields = count($tabs) + 1;
 //var_dump($fields);die("");
 for ($i = 0, $n = sizeof($languages); $i < $n; $i++) {

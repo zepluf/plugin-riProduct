@@ -4,7 +4,10 @@ namespace plugins\riProduct;
 use plugins\riCore\Object;
 use plugins\riPlugin\Plugin;
 
-class Products extends Object{
+class Products extends \plugins\riCore\Collection{
+
+    protected $model_service = 'riProduct.Product';
+
 	public function findById($products_id){
 		global $db;
 		$sql = "SELECT * FROM ".TABLE_PRODUCTS." WHERE products_id = :products_id";
@@ -82,12 +85,7 @@ class Products extends Object{
 	    
 	    $products_result = $db->Execute($sql);
         while (!$products_result->EOF) {                    
-            $products[] = array_merge($products_result->fields,
-                array(
-        			'products_display_price' => zen_get_products_display_price($products_result->fields['products_id']),    			            			
-        			'products_link' => zen_href_link(zen_get_info_page($products_result->fields['products_id']), 'products_id=' . $products_result->fields['products_id'])                        
-                )
-            );            
+            $products[] = $this->create($products_result->fields);
             $products_result->MoveNext();
         }
 	    
