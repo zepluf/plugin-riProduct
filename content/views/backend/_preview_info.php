@@ -1,5 +1,5 @@
 <?php
-global $languages;
+//global $languages;
 foreach($_POST['tab'] as $keys => $item){
     foreach($item as $key => $value){
 ?>
@@ -12,8 +12,3 @@ foreach($_POST['tab'] as $keys => $item){
         
     }
 }
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-?>

@@ -25,10 +25,12 @@ class ProductsDescription extends Model{
     public function getTab($language,$products_id){
         global $db;
         $data =array();
-        $sql = "select * from " . $this->table ." where language_id = " .$language ." and products_id = ".$products_id;
-        
+        $sql = "select * from " . $this->table ." where language_id = " .$language ." and products_id = :products_id";
+
+        $sql = $db->bindVars($sql, ':products_id', $products_id, 'integer');
+
         $result = $db->Execute($sql);
-        //echo "<pre>";var_dump($result);die();
+
         while(!$result->EOF){
             $data = $result->fields; 
             $result->MoveNext();

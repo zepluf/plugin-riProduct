@@ -1,12 +1,4 @@
-tabs:
-  tab_1:
-    type: text
-  tab_2:
-    type: text
-  tab_3:
-    type: text
-  tab_4:
-    type: text
+
 
 routes:
   ajax_find_by_name:

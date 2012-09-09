@@ -39,5 +39,3 @@ for ($i = 0, $n = sizeof($languages); $i < $n; $i++) {
         <?php
     }
 }
-?>
-
