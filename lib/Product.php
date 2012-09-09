@@ -199,7 +199,7 @@ class Product extends Model {
 
     public function getLink(){
         if(empty($this->products_link))
-        $this->products_link = zen_href_link(zen_get_info_page($this->productsId, 'products_id=' . $this->productsId));
+        $this->products_link = zen_href_link(zen_get_info_page($this->productsId), 'products_id=' . $this->productsId);
         return $this->products_link;
     }
 
